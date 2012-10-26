@@ -1,0 +1,2 @@
+module FacebookConnectionHelper
+end

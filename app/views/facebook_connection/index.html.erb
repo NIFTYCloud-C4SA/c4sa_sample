@@ -1,0 +1,50 @@
+<style type="text/css">
+<!--
+.item {
+  width: 300px;
+  margin: 10px;
+  float: left;
+  background-color: #EEE;
+}
+</style>
+
+<script>
+    $(function(){
+        var $container = $('#container');
+        $container.imagesLoaded(function(){
+            $('#container').masonry({
+                itemSelector: '.item',
+                columnWidth: 320,
+                isAnimated: true,
+                animationOptions: {
+                    duration: 400
+                }
+            });
+        });
+    });
+</script>
+		
+
+<h1>Facebook画像検索</h1>
+
+<form ="/facebook_connection/index">
+  <input type="text" size="50" name="keyword" />
+  <input type="submit" value="検索" />
+</form>
+
+<div id="container">
+  <% if @search_results != nil %>
+    <% @search_results.each do |result| %>
+      <% if result['picture'] != nil %>
+        <div class="item">
+          <div style="margin:15px;">
+            <a href="<%= result['link'] %>"><img src="<%= result['picture'] %>" /></a><br />
+            <% if result['message'] != nil %>
+              <%= result['message'][0,30] %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
